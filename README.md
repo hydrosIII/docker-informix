@@ -1,11 +1,11 @@
 docker-informix
 ===================
 
-Debian/Ubuntu based docker container with IBM Informix Dynamic Server.
+Debian/Ubuntu installer script for Debian/ubuntu based systems.
 
 The Informix Database Server is offered in a number of editions, including free developer editions, editions for small and mid-sized business, 
 and editions supporting the complete feature set and designed to be used in support of the largest enterprise applications. 
-If you are confused which version of Inforix choose use [Informix feature description](http://www.ibm.com/developerworks/data/library/techarticle/dm-0801doe/index.html#table).
+If you are confused which version of Informix choose use [Informix feature description](http://www.ibm.com/developerworks/data/library/techarticle/dm-0801doe/index.html#table).
 
 Informix is generally considered to be optimized for environments with very low or no database administration, 
 including use as an embedded database. It has a long track record of supporting very high transaction rates 
@@ -22,31 +22,18 @@ so I have created this small project to create Docker container with Informix.
 I am not sure that this container is production ready - I am using it for developement and testing.
 
 
-Building Informix container image (Ubuntu host)
----------------------------------------------
+Installing Informix container image (Debian host)
+---
 
-```bash
-## Remove standard Ubuntu Docker installation and install most recent Docker
-sudo apt-get purge docker.io
-curl -s https://get.docker.io/ubuntu/ | sudo sh
 
-## Create enviroment for docker-informix container build
-mkdir informix_build
-cd informix_build
-git clone https://github.com/0x1fff/docker-informix.git
+## Download IBM Informix installation files.
 
-## Download IBM Informix installation files from IBM and copy it
-cp iif.*.linux-x86_64.tar .
 
-## Start HTTP server with Informix image
-python -m SimpleHTTPServer 9090 &
-PY_HTTP=$!
 
-## Build docker image (Dockerfile may require minor changes)
-sudo docker build -t docker-informix docker-informix
+## Run informix intall script with database download.
 
-## Shutdown HTTP server
-kill $PY_HTTP
+informix-install.sh iif-version.tar
+
 ```
 
 
